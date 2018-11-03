@@ -13,3 +13,16 @@ class Category(models.Model):
 
 	def __unicode__(self):
 		return self.name
+
+class Article(models.Model):
+
+	category = models.ForeignKey(Category)
+	title = models.CharField(max_length=120)
+	slug = models.SlugField()
+	image = models.ImageField()
+	content = models.TextField()
+	likes = models.PositiveIntegerField(default=0)
+	dislikes = models.PositiveIntegerField(default=0)
+
+	def __unicode__(self):
+		return self.title
