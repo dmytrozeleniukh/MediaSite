@@ -24,7 +24,7 @@ class Article(models.Model):
 	category = models.ForeignKey(Category)
 	title = models.CharField(max_length=120)
 	slug = models.SlugField()
-	image = models.ImageField(upload_to = generate_filename)
+	image = models.ImageField(upload_to = generate_filename, blank=True)
 	content = models.TextField()
 	likes = models.PositiveIntegerField(default=0)
 	dislikes = models.PositiveIntegerField(default=0)
