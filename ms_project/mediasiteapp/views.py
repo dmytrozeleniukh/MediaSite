@@ -14,4 +14,5 @@ class ArticleListView(ListView):
     def get_context_data(self, *args, **kwargs):
     	context = super(ArticleListView, self).get_context_data(*args, **kwargs)
     	context['articles'] = self.model.objects.all()
+    	context['custom_articles'] = self.model.custom_manager.all()
     	return context

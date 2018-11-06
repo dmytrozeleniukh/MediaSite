@@ -18,6 +18,11 @@ def generate_filename(instance, filename):
 	filename = instance.slug + '.jpg'
 	return "{0}/{1}".format(instance, filename)
 
+class ArticleManager(models.Manager):
+
+	def all(self, *args, **kwargs):
+		return super(ArticleManager, self).get_queryset().filter(pk__in=[2])
+
 
 class Article(models.Model):
 
@@ -28,6 +33,14 @@ class Article(models.Model):
 	content = models.TextField()
 	likes = models.PositiveIntegerField(default=0)
 	dislikes = models.PositiveIntegerField(default=0)
+	objects = models.Manager()
+	custom_manager = ArticleManager()
 
 	def __unicode__(self):
 		return self.title
+
+
+class MyArticles(Article): #test
+
+	class Meta:
+		proxy = True
