@@ -2,6 +2,7 @@
 from __future__ import unicode_literals
 
 from django.db import models
+from django.urls import reverse
 
 # Create your models here.
 
@@ -14,14 +15,13 @@ class Category(models.Model):
 	def __unicode__(self):
 		return self.name
 
+
+	# def get_absolute_url(self):
+
 def generate_filename(instance, filename):
 	filename = instance.slug + '.jpg'
 	return "{0}/{1}".format(instance, filename)
 
-class ArticleManager(models.Manager):
-
-	def all(self, *args, **kwargs):
-		return super(ArticleManager, self).get_queryset().filter(pk__in=[2])
 
 
 class Article(models.Model):
@@ -33,8 +33,7 @@ class Article(models.Model):
 	content = models.TextField()
 	likes = models.PositiveIntegerField(default=0)
 	dislikes = models.PositiveIntegerField(default=0)
-	objects = models.Manager()
-	custom_manager = ArticleManager()
+
 
 	def __unicode__(self):
 		return self.title

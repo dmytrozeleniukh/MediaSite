@@ -1,6 +1,6 @@
 from django.conf.urls import url
-from mediasiteapp.views import ArticleListView
+from mediasiteapp.views import CategoryListView
 
 urlpatterns = [
-    url(r'^$', ArticleListView.as_view()),
+    url(r'^$', CategoryListView.as_view()),
 ]
