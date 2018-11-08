@@ -8,38 +8,39 @@ from django.urls import reverse
 
 
 class Category(models.Model):
-	
-	name = models.CharField(max_length=50)
-	slug = models.SlugField()
 
-	def __unicode__(self):
-		return self.name
+    name = models.CharField(max_length=50)
+    slug = models.SlugField()
+
+    def __unicode__(self):
+        return self.name
 
 
-	# def get_absolute_url(self):
+    def get_absolute_url(self):
+        return reverse('category-detail', kwargs={'slug': self.slug})
 
 def generate_filename(instance, filename):
-	filename = instance.slug + '.jpg'
-	return "{0}/{1}".format(instance, filename)
+    filename = instance.slug + '.jpg'
+    return "{0}/{1}".format(instance, filename)
 
 
 
 class Article(models.Model):
 
-	category = models.ForeignKey(Category)
-	title = models.CharField(max_length=120)
-	slug = models.SlugField()
-	image = models.ImageField(upload_to = generate_filename, blank=True)
-	content = models.TextField()
-	likes = models.PositiveIntegerField(default=0)
-	dislikes = models.PositiveIntegerField(default=0)
+    category = models.ForeignKey(Category)
+    title = models.CharField(max_length=120)
+    slug = models.SlugField()
+    image = models.ImageField(upload_to = generate_filename, blank=True)
+    content = models.TextField()
+    likes = models.PositiveIntegerField(default=0)
+    dislikes = models.PositiveIntegerField(default=0)
 
 
-	def __unicode__(self):
-		return self.title
+    def __unicode__(self):
+        return self.title
 
 
 class MyArticles(Article): #test
 
-	class Meta:
-		proxy = True
+    class Meta:
+        proxy = True
