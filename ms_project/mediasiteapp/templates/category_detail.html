@@ -1,4 +1,23 @@
 {% extends 'index.html' %}
+
+
+
 {% block content %}
-<h2>Тест: {{ category.name }}</h2>
+  <div class="container">
+    <h2>Тест: {{ category.name }}</h2>
+    {% for article in articles_from_category %}
+      <div class="row my-4">
+        <div class="col-lg-8">
+          <img class="img-fluid rounded" src="{{ article.image.url }}">
+        </div>
+        <!-- /.col-lg-8 -->
+        <div class="col-lg-4">
+          <h1>{{ article.title }}</h1>
+          <p>{{ article.content|truncatewords:15}}</p>
+          <a class="btn btn-primary btn-lg" href="{{ article.get_absolute_url }}">Показати більше</a>
+        </div>
+        <!-- /.col-md-4 -->
+      </div>
+    {% endfor %}
+  </div>
 {% endblock content %}

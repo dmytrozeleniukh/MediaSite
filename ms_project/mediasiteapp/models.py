@@ -39,6 +39,9 @@ class Article(models.Model):
     def __unicode__(self):
         return self.title
 
+    def get_absolute_url(self):
+        return reverse('article-detail', kwargs={'slug': self.slug})
+
 
 class MyArticles(Article): #test
 
