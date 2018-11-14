@@ -2,6 +2,21 @@
 
 {% block content %}
 
-<h2>test</h2>
+{{ article.title }}
+
+{{ article.contenr|safe }}
+<h2>Коментарі: </h2>
+{% for comment in article_comments %}
+{{ comment.author.username }}
+{{ comment.comment }}
+{{ comment.timestamp }}
+{% endfor %}
+
+
+{% block jq %}
+<script>
+	alert('hi')
+</script>
+{% endblock jq %}
 
 {% endblock content %}

@@ -39,7 +39,7 @@ class CategoryDetailView(DetailView, CategoryListMixin):
     def get_context_data(self, *args, **kwargs):
         context = super(CategoryDetailView, self).get_context_data(*args, **kwargs)
         #context['categories'] = self.model.objects.all()
-        context['category']=self.get_object()
+        context['category'] = self.get_object()
         context['articles_from_category'] = self.get_object().article_set.all()
         return context
  
@@ -51,5 +51,6 @@ class ArticleDetailView(DetailView, CategoryListMixin):
     def get_context_data(self, *args, **kwargs):
         context = super(ArticleDetailView, self).get_context_data(*args, **kwargs)
         #context['categories'] = self.model.objects.all()
-        context['article']=self.get_object()
+        context['article'] = self.get_object()
+        context['article_comments'] = self.get_object().comments.all()
         return context
